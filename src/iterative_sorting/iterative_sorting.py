@@ -1,26 +1,46 @@
 # TO-DO: Complete the selection_sort() function below
 def selection_sort(arr):
-    # loop through n-1 elements
-    for i in range(0, len(arr) - 1):
-        cur_index = i
-        smallest_index = cur_index
-        # TO-DO: find next smallest element
-        # (hint, can do in 3 loc)
-        # Your code here
+    # iterate through the array (represents the sorted-unsorted boundary 
+    # moving across the array)
+    for i in range(len(arr)):  # O(n)
+        # index of the boundary, as well as the index we're going to 
+        # swap the smallest element with 
+        boundary = i
+        smallest_value = arr[boundary]
+        smallest_index = boundary
+        # finding the smallest element 
+        # in the "unsorted" portion of the array 
+        for unsorted_index in range(boundary, len(arr)):  # O(n)
+            if arr[unsorted_index] < smallest_value:
+                smallest_value = arr[unsorted_index]
+                smallest_index = unsorted_index
 
-
-        # TO-DO: swap
-        # Your code here
+        # `smallest_index` is the index of the smallest element in the unsorted portion 
+        # once that's found, swap it with the element on the right edge 
+        # of the sorted-unsorted boundary 
+        arr[boundary], arr[smallest_index] = arr[smallest_index], arr[boundary]
 
     return arr
 
 
 # TO-DO:  implement the Bubble Sort function below
 def bubble_sort(arr):
-    # Your code here
+# Compare the first and second item of a collection. If the first item is bigger than the second item, swap the items.
+# Move to the next item. Now, we will compare the second item with the third item. If the second item is bigger than the third, swap the items.
+# Do this for every item until the end of the list.
+# Repeat steps 1-3 (decrementing “the end of the list” by 1 each time).
 
+    indexing_length = len(arr) - 1  #SCan not apply comparision starting with last item of list (No item to right)
+    sorted = False                  #Create variable of sorted and set it equal to false
 
-    return arr
+    while not sorted:               #Repeat until sorted = True
+        sorted = True               #Break the while loop whenever we have gone through all the values
+
+        for i in range(0, indexing_length):            # For every value in the list
+            if arr[i] > arr[i+1]:                      # if value in list is greater than value directly to the right of it,
+                sorted = False                         # These values are unsorted
+                arr[i], arr[i+1] = arr[i+1], arr[i]    # Switch these values
+    return arr                                         # Return our list "unsorted_list" which is not sorted.
 
 '''
 STRETCH: implement the Counting Sort function below
